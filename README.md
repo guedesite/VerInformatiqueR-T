@@ -1,2 +1,2 @@
 # VersInformatiqueR-T
-[![Build Status](https://travis-ci.org/guedesite/VersInformatiqueR-T.svg?branch=master)](https://travis-ci.org/guedesite/VersInformatiqueR-T) [![Coverage Status](https://img.shields.io/coveralls/github/guedesite/VersInformatiqueR-T/master.svg)](https://coveralls.io/github/guedesite/VersInformatiqueR-T?branch=master) [![Release](https://jitpack.io/v/guedesite/VersInformatiqueR-T.svg)](https://jitpack.io/#guedesite/VersInformatiqueR-T)
+[![Release](https://jitpack.io/v/guedesite/VersInformatiqueR-T.svg)](https://jitpack.io/#guedesite/VersInformatiqueR-T)
