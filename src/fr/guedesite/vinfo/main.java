@@ -77,6 +77,7 @@ public class main {
 		cmd.put("brute", new brute());
 		cmd.put("openTerminal", new openTerminal());
 		cmd.put("sendFile", new sendFile());
+		cmd.put("logger", new logger());
 		
 	}
 
