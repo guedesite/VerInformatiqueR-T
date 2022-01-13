@@ -48,7 +48,10 @@ public class scan extends CMDRunnable{
 		           if(addr.toString().lastIndexOf(".") == -1) {
 		        	   continue;
 		           }
-		            String res = addr.toString().substring(0,  addr.toString().toString().lastIndexOf(".")).substring(1);
+		            String res = addr.toString().substring(0,  addr.toString().toString().lastIndexOf("."));
+		            if(res.startsWith("/")) {
+		            	res = res.substring(1);
+		            }
 		            log(res+".* ...");
 		            ConcurrentSkipListSet networkIps = scan(res, 254);
 					if(networkIps.size() == 0) {
@@ -96,25 +99,29 @@ public class scan extends CMDRunnable{
 	public static ConcurrentSkipListSet scan(String firstIpInTheNetwork, int numOfIps) {
         ExecutorService executorService = Executors.newFixedThreadPool(200);
         final String networkId = firstIpInTheNetwork.substring(0, firstIpInTheNetwork.length() - 1);
-        ConcurrentSkipListSet ipsSet = new ConcurrentSkipListSet();
+       final ConcurrentSkipListSet ipsSet = new ConcurrentSkipListSet();
 
         AtomicInteger ips = new AtomicInteger(0);
         while (ips.get() <= numOfIps) {
-            String ip = networkId + ips.getAndIncrement();
-            executorService.submit(() -> {
-            	
-            	 try {
-         		    Session connection = new JSch().getSession("xyz", ip, 22);
-         			connection.setPassword("xyz");
-         			connection.setTimeout(2000);
-         			connection.setConfig("StrictHostKeyChecking", "no");
-         			connection.connect();
-         	    } catch (JSchException e) {
-         			if(e.getMessage().equals("Auth fail")) {
-         				ipsSet.add(ip);
-         			}
-         		}
-            });
+            final String ip = networkId + ips.getAndIncrement();
+            executorService.submit(new Runnable() {
+				
+				@Override
+				public void run() {
+					 try {
+		         		    Session connection = new JSch().getSession("xyz", ip, 22);
+		         			connection.setPassword("xyz");
+		         			connection.setTimeout(2000);
+		         			connection.setConfig("StrictHostKeyChecking", "no");
+		         			connection.connect();
+		         	    } catch (JSchException e) {
+		         			if(e.getMessage().equals("Auth fail")) {
+		         				ipsSet.add(ip);
+		         			}
+		         		}
+					
+				}
+			}); 
         }
         executorService.shutdown();
         try {

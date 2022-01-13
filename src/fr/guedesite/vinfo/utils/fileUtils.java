@@ -16,6 +16,8 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
+import fr.guedesite.vinfo.main;
+
 public class fileUtils {
 
 	public static File openFileChooser() {
@@ -140,5 +142,13 @@ public class fileUtils {
         }
         return b;
     }
+	
+	public static String getPathCurrentJar() {
+		String path = main.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		if(System.getProperty("os.name").toLowerCase().contains("win") && path.startsWith("/")) {
+			return path.substring(1);
+		}
+		return path;
+	}
 	
 }

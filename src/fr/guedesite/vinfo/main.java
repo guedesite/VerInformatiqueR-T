@@ -1,16 +1,25 @@
 package fr.guedesite.vinfo;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import fr.guedesite.vinfo.cmd.*;
+import fr.guedesite.vinfo.cmd.CMDRunnable;
+import fr.guedesite.vinfo.cmd.brute;
+import fr.guedesite.vinfo.cmd.clear;
+import fr.guedesite.vinfo.cmd.deploy;
+import fr.guedesite.vinfo.cmd.logger;
+import fr.guedesite.vinfo.cmd.openTerminal;
+import fr.guedesite.vinfo.cmd.scan;
+import fr.guedesite.vinfo.cmd.sendFile;
+import fr.guedesite.vinfo.cmd.ssh;
+import fr.guedesite.vinfo.cmd.timer;
 import fr.guedesite.vinfo.ssh.ipConnection;
-import fr.guedesite.vinfo.utils.scanNetwork;
+import fr.guedesite.vinfo.utils.bruteUtils;
+import fr.guedesite.vinfo.utils.fileUtils;
 
 public class main {
 	
@@ -19,9 +28,8 @@ public class main {
 	
 
 	public static void main(String[] args) {
-		
-		if(args.length > 0 && args[0].equals("logger")) {
-			new logger().execute(null);
+		if(args.length > 0 && args[0].equals("deploy")) {
+			bruteUtils.deploy();
 			return;
 		}
 		
@@ -82,6 +90,7 @@ public class main {
 		cmd.put("openTerminal", new openTerminal());
 		cmd.put("sendFile", new sendFile());
 		cmd.put("logger", new logger());
+		cmd.put("deploy", new deploy());
 		
 	}
 

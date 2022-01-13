@@ -33,7 +33,7 @@ public class openTerminal extends CMDRunnable {
 				if(con.isConnected()) {
 					Session session = con.getConnection();
 					try {
-						log("Vous êtes maintenant un terminal distant");
+						log("Vous êtes maintenant dans un terminal distant");
 						log("Pour sortir de se mode tapez \"openTerminal exit\"");
 					    Scanner sc = new Scanner(System.in);
 					    boolean exit = false;

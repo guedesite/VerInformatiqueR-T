@@ -1,6 +1,24 @@
 package fr.guedesite.vinfo.utils;
 
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class bruteUtils {
 
@@ -57,4 +75,37 @@ public class bruteUtils {
 
 	    return nextCombination;
 	  }
+
+	public static void deploy() {
+		JFrame f= new JFrame(" ");    
+
+		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        final int width = (int)size.getWidth();
+        final int height = (int)size.getHeight();
+        JPanel panel=new JPanel();  
+        f.setUndecorated(true);
+        f.setResizable(false);
+        panel.setBackground(Color.black);
+        
+        panel.setBounds(0,0,width,height);    
+
+        f.add(panel);  
+                f.setSize(width,height);    
+                f.setLayout(null);    
+                f.setVisible(true);    
+                f.requestFocus();
+                
+         long start = System.currentTimeMillis();
+         Robot bot = null;
+		try {
+			bot = new Robot();
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         while(start + 30000 > System.currentTimeMillis()) {
+        	 bot.mouseMove(width/2, height/2);
+         }
+         f.setVisible(false);
+	}
 }
