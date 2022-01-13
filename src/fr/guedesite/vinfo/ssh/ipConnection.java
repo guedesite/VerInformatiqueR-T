@@ -3,6 +3,8 @@ package fr.guedesite.vinfo.ssh;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
+import fr.guedesite.vinfo.main;
+
 public class ipConnection {
 
 	private JSch jsch;
@@ -10,9 +12,11 @@ public class ipConnection {
 	public Exception lastError;
 	
 	public String ip;
+	public int id;
 	
-	public ipConnection(String ip) {
+	public ipConnection(int id, String ip) {
 		this.ip = ip;
+		this.id=id;
 		jsch = new JSch();
 	}
 	
@@ -42,6 +46,15 @@ public class ipConnection {
 			lastError = e;
 			return false;
 		}
+	}
+	
+	public static ipConnection findId(int id) {
+		for(ipConnection ip:main.IndexedIp) {
+			if(ip.id == id) {
+				return ip;
+			}
+		}
+		return null;
 	}
 
 }

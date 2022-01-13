@@ -28,8 +28,8 @@ public class openTerminal extends CMDRunnable {
 				log("essayez \"scan\"");
 				return;
 			}
-			if(main.IndexedIp.containsKey(id)) {
-				ipConnection con = main.IndexedIp.get(id);
+			if(ipConnection.findId(id) != null) {
+				ipConnection con = ipConnection.findId(id);
 				if(con.isConnected()) {
 					Session session = con.getConnection();
 					try {

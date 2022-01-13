@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -13,13 +14,16 @@ import fr.guedesite.vinfo.utils.scanNetwork;
 
 public class main {
 	
-	public static Map<Integer, ipConnection> IndexedIp;
+	public static List<ipConnection> IndexedIp;
 	private static Map<String, CMDRunnable> cmd;
 	
 
 	public static void main(String[] args) {
 		
-		
+		if(args.length > 0 && args[0].equals("logger")) {
+			new logger().execute(null);
+			return;
+		}
 		
 		System.out.println("Démarrage du verre informatique");
 		System.out.println("Enregistrement des commandes ...");

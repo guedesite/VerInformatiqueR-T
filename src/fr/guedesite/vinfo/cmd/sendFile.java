@@ -1,10 +1,13 @@
 package fr.guedesite.vinfo.cmd;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Scanner;
 
+import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSchException;
@@ -33,8 +36,8 @@ public class sendFile extends CMDRunnable{
 				log("essayez \"scan\"");
 				return;
 			}
-			if(main.IndexedIp.containsKey(id)) {
-				ipConnection con = main.IndexedIp.get(id);
+			if(ipConnection.findId(id) != null) {
+				ipConnection con = ipConnection.findId(id);
 				if(con.isConnected()) {
 					Session session = con.getConnection();
 					File source;
@@ -46,14 +49,11 @@ public class sendFile extends CMDRunnable{
 					if(source.exists()) {
 						String dest = arg[2] != null ? arg[2] : "/";
 						try {
-							log("Envoie du fichier "+source.getName()+" en cours ...");
-							ChannelSftp sftpChannel = (ChannelSftp) session.openChannel("sftp");
-							sftpChannel.connect();
-							sftpChannel.put(source.getAbsolutePath(), dest);
-							sftpChannel.disconnect();
+							fileUtils.copyLocalToRemote(session, source.getAbsolutePath(), dest);
 							log("Le fichier a été envoyé avec succès");
 						} catch (Exception e) {
 							log("Une erreur fatal est survenue");
+							e.printStackTrace();
 							log(e.getMessage());
 						}
 					} else {
@@ -81,7 +81,8 @@ public class sendFile extends CMDRunnable{
 
 	@Override
 	public String getDescription() {
-		return "envois un fichier à une connexion SSH";
+		return "Envois un fichier à une connexion SSH";
 	}
+
 
 }

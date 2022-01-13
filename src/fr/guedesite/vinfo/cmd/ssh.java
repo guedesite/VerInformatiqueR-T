@@ -1,5 +1,7 @@
 package fr.guedesite.vinfo.cmd;
 
+import java.util.Iterator;
+
 import fr.guedesite.vinfo.main;
 import fr.guedesite.vinfo.ssh.ipConnection;
 
@@ -17,14 +19,16 @@ public class ssh extends CMDRunnable {
 			} catch(NumberFormatException e) {
 				log("Nombre invalide");
 				showHelp();
+				return;
 			}
 			if(main.IndexedIp == null) {
 				log("Aucune IP indexé");
 				log("essayez \"scan\"");
 				return;
 			}
-			if(main.IndexedIp.containsKey(id)) {
-				ipConnection con = main.IndexedIp.get(id);
+			if(ipConnection.findId(id) != null) {
+				
+				ipConnection con = ipConnection.findId(id);
 				if(arg[1].equals("open")) {
 					if(arg.length == 4) {
 						log("Connexion: "+arg[2]+"@"+con.ip+" pass:"+arg[3]+" en cours ...");
@@ -44,6 +48,7 @@ public class ssh extends CMDRunnable {
 					log("Connexion "+id+" fermé");
 				} else {
 					showHelp();
+					return;
 				}
 			} else {
 				log("Aucune IP avec cette ID trouvé");

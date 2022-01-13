@@ -37,8 +37,8 @@ private final int maxThread = 1000;
 				log("essayez \"scan\"");
 				return;
 			}
-			if(main.IndexedIp.containsKey(id)) {
-				ipConnection con = main.IndexedIp.get(id);
+			if(ipConnection.findId(id) != null) {
+				ipConnection con = ipConnection.findId(id);
 				log("processus en cours sur "+arg[1]+"@"+con.ip);
 				bruteUtils.reset();
 				while(password == null) {
