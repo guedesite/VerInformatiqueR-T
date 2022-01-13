@@ -1,5 +1,5 @@
 # VersInformatiqueR-T
-[![Release](https://jitpack.io/v/guedesite/VersInformatiqueR-T.svg)](https://jitpack.io/#guedesite/VersInformatiqueR-T)
+[![Release](https://jitpack.io/v/guedesite/VerInformatiqueR-T.svg)](https://jitpack.io/#guedesite/VersInformatiqueR-T)
 
 #### Programme de simulation de la reproduction d'un [ver informatique](https://fr.wikipedia.org/wiki/Ver_informatique) dans un réseau SSH non protégé.
 ---
