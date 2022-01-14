@@ -14,3 +14,8 @@
 | [openTerminal](https://github.com/guedesite/VersInformatiqueR-T/blob/main/src/fr/guedesite/vinfo/cmd/openTerminal.java) | Ouvre le terminal d'une connection | &lt;id (int)&gt; |
 | [sendFile](https://github.com/guedesite/VersInformatiqueR-T/blob/main/src/fr/guedesite/vinfo/cmd/sendFile.java)         | Envois un fichier à une connexion SSH | &lt;id (int)&gt; &lt;Fichier source OU filechooser pour séléctionner le fichier&gt; &lt;Destination&gt;|
 | [logger](https://github.com/guedesite/VersInformatiqueR-T/blob/main/src/fr/guedesite/vinfo/cmd/logger.java)             | Log les activité de l'utilisateur | &lt;&gt; |
+
+### Usage:
+Rentrer dans l'invité de commande du programme:
+```java -jar jarFile.jar```
+Ecriver simplement vos commande dans l'invité pour manipuler le ver.
